@@ -43,7 +43,10 @@ const RESERVED_FOR_COLUMN_ALIAS: &[Keyword] = &[
 
 /// A [`Dialect`] for [Google Bigquery](https://cloud.google.com/bigquery/)
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct BigQueryDialect;
 
 impl Dialect for BigQueryDialect {

@@ -52,7 +52,7 @@ use crate::parser::ParserError;
 ///
 /// [1]: Statement::CreateDatabase
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateDatabaseBuilder {
     /// The database name to create.

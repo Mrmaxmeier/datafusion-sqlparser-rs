@@ -69,7 +69,7 @@ use sqlparser_derive::{Visit, VisitMut};
 /// ```
 /// A `Value` paired with its source `Span` location.
 #[derive(Debug, Clone, Eq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(
     feature = "visitor",
     derive(Visit, VisitMut),
@@ -134,8 +134,9 @@ impl DerefMut for ValueWithSpan {
 
 /// Primitive SQL values such as number and string
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
+#[repr(u16)]
 pub enum Value {
     /// Numeric literal
     #[cfg(not(feature = "bigdecimal"))]
@@ -294,7 +295,7 @@ impl fmt::Display for Value {
 
 /// A dollar-quoted string literal, e.g. `$$...$$` or `$tag$...$tag$`.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DollarQuotedString {
     /// Inner string contents.
@@ -321,7 +322,7 @@ impl fmt::Display for DollarQuotedString {
 /// See [Value::QuoteDelimitedStringLiteral] and/or
 /// [Value::NationalQuoteDelimitedStringLiteral].
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct QuoteDelimitedString {
     /// the quote start character; i.e. the character _after_ the opening `Q'`
@@ -344,8 +345,9 @@ impl fmt::Display for QuoteDelimitedString {
 /// `YEAR`, `MONTH`, `DAY`, etc.). The `Custom` variant allows arbitrary
 /// identifiers (e.g. dialect-specific abbreviations).
 #[derive(Debug, Clone, PartialEq, Eq, Ord, PartialOrd, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
+#[repr(u16)]
 pub enum DateTimeField {
     /// `YEAR`
     Year,
@@ -502,12 +504,13 @@ impl fmt::Display for DateTimeField {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Ord, PartialOrd, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// The Unicode Standard defines four normalization forms, which are intended to eliminate
 /// certain distinctions between visually or functionally identical characters.
 ///
 /// See [Unicode Normalization Forms](https://unicode.org/reports/tr15/) for details.
+#[repr(u16)]
 pub enum NormalizationForm {
     /// Canonical Decomposition, followed by Canonical Composition.
     NFC,
@@ -687,8 +690,9 @@ pub fn escape_unicode_string(s: &str) -> EscapeUnicodeStringLiteral<'_> {
 ///
 /// Corresponds to `TRIM(BOTH|LEADING|TRAILING)` SQL syntax.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
+#[repr(u16)]
 pub enum TrimWhereField {
     /// `BOTH` (trim from both ends)
     Both,

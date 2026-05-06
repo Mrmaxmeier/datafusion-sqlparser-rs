@@ -30,8 +30,9 @@ use super::display_separated;
 
 /// Unary operators
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
+#[repr(u16)]
 pub enum UnaryOperator {
     /// `@-@` Length or circumference (PostgreSQL/Redshift geometric operator)
     /// see <https://www.postgresql.org/docs/9.5/functions-geometry.html>
@@ -94,8 +95,9 @@ impl fmt::Display for UnaryOperator {
 
 /// Binary operators
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
+#[repr(u16)]
 pub enum BinaryOperator {
     /// Plus, e.g. `a + b`
     Plus,

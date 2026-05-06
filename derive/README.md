@@ -97,7 +97,7 @@ like to call the method:
 ```rust
 #[derive(Visit, VisitMut)]
 #[visit(with = "visit_table_factor")]
-pub enum TableFactor {
+#[repr(u16)] pub enum TableFactor {
     Table {
         #[visit(with = "visit_relation")]
         name: ObjectName,

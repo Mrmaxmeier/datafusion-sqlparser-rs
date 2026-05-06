@@ -21,7 +21,10 @@ use crate::dialect::Dialect;
 ///
 /// See <https://docs.databricks.com/en/sql/language-manual/index.html>.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct DatabricksDialect;
 
 impl Dialect for DatabricksDialect {
