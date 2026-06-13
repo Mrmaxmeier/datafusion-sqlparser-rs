@@ -23,7 +23,10 @@ use super::PostgreSqlDialect;
 
 /// A [`Dialect`] for [RedShift](https://aws.amazon.com/redshift/)
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct RedshiftSqlDialect {}
 
 // In most cases the redshift dialect is identical to [`PostgresSqlDialect`].

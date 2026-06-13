@@ -53,6 +53,7 @@ use sqlparser::parser::ParserState::ColumnDefinition;
 
 /// Errors produced by the SQL parser.
 #[derive(Debug, Clone, PartialEq, Eq)]
+#[repr(u16)]
 pub enum ParserError {
     /// Error originating from the tokenizer with a message.
     TokenizerError(String),
@@ -162,6 +163,7 @@ mod recursion {
 
 #[derive(PartialEq, Eq)]
 /// Indicates whether a parser element is optional or mandatory.
+#[repr(u16)]
 pub enum IsOptional {
     /// The element is optional.
     Optional,
@@ -170,6 +172,7 @@ pub enum IsOptional {
 }
 
 /// Indicates if a table expression is lateral.
+#[repr(u16)]
 pub enum IsLateral {
     /// The expression is lateral.
     Lateral,
@@ -178,6 +181,7 @@ pub enum IsLateral {
 }
 
 /// Represents a wildcard expression used in SELECT lists.
+#[repr(u16)]
 pub enum WildcardExpr {
     /// A specific expression used instead of a wildcard.
     Expr(Expr),

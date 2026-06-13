@@ -1817,6 +1817,7 @@ pub trait Dialect: Debug + Any {
 /// Higher number -> higher precedence.
 /// See expression parsing for how these values are used.
 #[derive(Debug, Clone, Copy)]
+#[repr(u16)]
 pub enum Precedence {
     /// Member access operator `.` (highest precedence).
     Period,

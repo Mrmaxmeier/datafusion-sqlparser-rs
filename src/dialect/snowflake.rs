@@ -131,7 +131,10 @@ const RESERVED_KEYWORDS_FOR_TABLE_FACTOR: &[Keyword] = &[
 
 /// A [`Dialect`] for [Snowflake](https://www.snowflake.com/)
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct SnowflakeDialect;
 
 impl Dialect for SnowflakeDialect {

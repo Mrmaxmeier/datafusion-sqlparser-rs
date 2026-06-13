@@ -78,7 +78,7 @@ use sqlparser_derive::{Visit, VisitMut};
 /// ```
 /// // period @ line 2, column 20
 #[derive(Clone)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AttachedToken(pub TokenWithSpan);
 

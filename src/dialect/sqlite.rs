@@ -31,7 +31,10 @@ use crate::parser::{Parser, ParserError};
 /// type specified, as in `CREATE TABLE t1 (a)`. In the AST, these columns will
 /// have the data type [`Unspecified`](crate::ast::DataType::Unspecified).
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct SQLiteDialect {}
 
 impl Dialect for SQLiteDialect {

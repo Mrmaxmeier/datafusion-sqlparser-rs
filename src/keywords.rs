@@ -52,11 +52,11 @@ macro_rules! define_keywords {
         $ident:ident $(= $string_keyword:expr)?
     ),*) => {
         #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
-        #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+        #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
         #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
         #[allow(non_camel_case_types)]
         /// An enumeration of SQL keywords recognized by the parser.
-        pub enum Keyword {
+        #[repr(u16)] pub enum Keyword {
             /// Represents no keyword.
             NoKeyword,
             $(

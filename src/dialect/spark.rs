@@ -27,7 +27,10 @@ use crate::parser::{Parser, ParserError};
 ///
 /// See <https://spark.apache.org/docs/latest/sql-ref-syntax.html>.
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct SparkSqlDialect;
 
 impl Dialect for SparkSqlDialect {

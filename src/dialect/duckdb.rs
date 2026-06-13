@@ -19,7 +19,10 @@ use crate::dialect::Dialect;
 
 /// A [`Dialect`] for [DuckDB](https://duckdb.org/)
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(
+    feature = "serde",
+    derive(serde::Serialize, facet::Facet, serde::Deserialize)
+)]
 pub struct DuckDbDialect;
 
 // In most cases the redshift dialect is identical to [`PostgresSqlDialect`].
