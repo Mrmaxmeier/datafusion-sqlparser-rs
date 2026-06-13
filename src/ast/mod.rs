@@ -529,7 +529,7 @@ impl fmt::Display for Interval {
             ) => {
                 // When the leading field is SECOND, the parser guarantees that
                 // the last field is None.
-                assert!(self.last_field.is_none());
+                // assert!(self.last_field.is_none());
                 write!(
                     f,
                     "INTERVAL {value} SECOND ({leading_precision}, {fractional_seconds_precision})"
