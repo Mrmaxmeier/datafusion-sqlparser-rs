@@ -382,8 +382,11 @@ impl fmt::Display for Ident {
                 write!(f, "{q}{escaped}{q}")
             }
             Some('[') => write!(f, "[{}]", self.value),
+            Some(q) => {
+                let escaped = value::escape_quoted_string(&self.value, q);
+                write!(f, "{q}{escaped}{q}")
+            }
             None => f.write_str(&self.value),
-            _ => panic!("unexpected quote style"),
         }
     }
 }
