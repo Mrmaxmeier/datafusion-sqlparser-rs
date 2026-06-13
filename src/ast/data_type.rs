@@ -918,8 +918,10 @@ pub enum StructBracketKind {
 
 /// Type of brackets used for `MAP` types.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
+#[repr(u16)]
 pub enum MapBracketKind {
     /// Example: `Map(String, UInt16)`
     Parentheses,
