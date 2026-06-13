@@ -35,6 +35,7 @@ use crate::parser::{Parser, ParserError};
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct SQLiteDialect {}
 
 impl Dialect for SQLiteDialect {

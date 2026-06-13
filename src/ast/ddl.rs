@@ -59,6 +59,7 @@ use crate::tokenizer::{Span, Token};
 /// Index column type.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct IndexColumn {
     /// The indexed column expression.
@@ -97,6 +98,7 @@ impl fmt::Display for IndexColumn {
 /// See [Postgres ALTER TABLE docs](https://www.postgresql.org/docs/current/sql-altertable.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum ReplicaIdentity {
@@ -124,6 +126,7 @@ impl fmt::Display for ReplicaIdentity {
 /// An `ALTER TABLE` (`Statement::AlterTable`) operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterTableOperation {
@@ -543,6 +546,7 @@ pub enum AlterTableOperation {
 /// [PostgreSQL Documentation](https://www.postgresql.org/docs/current/sql-altertable.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterPolicyOperation {
@@ -593,6 +597,7 @@ impl fmt::Display for AlterPolicyOperation {
 /// [MySQL]: https://dev.mysql.com/doc/refman/8.4/en/alter-table.html
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Algorithm option for `ALTER TABLE` operations (MySQL-specific).
 #[repr(u16)]
@@ -623,6 +628,7 @@ impl fmt::Display for AlterTableAlgorithm {
 /// [MySQL]: https://dev.mysql.com/doc/refman/8.4/en/alter-table.html
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Locking behavior for `ALTER TABLE` (MySQL-specific).
 #[repr(u16)]
@@ -650,6 +656,7 @@ impl fmt::Display for AlterTableLock {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// New owner specification for `ALTER TABLE ... OWNER TO ...`
 #[repr(u16)]
@@ -677,6 +684,7 @@ impl fmt::Display for Owner {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// New connector owner specification for `ALTER CONNECTOR ... OWNER TO ...`
 #[repr(u16)]
@@ -698,6 +706,7 @@ impl fmt::Display for AlterConnectorOwner {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Alterations that can be applied to an index.
 #[repr(u16)]
@@ -1069,6 +1078,7 @@ impl fmt::Display for AlterIndexOperation {
 /// An `ALTER TYPE` statement (`Statement::AlterType`)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterType {
     /// Name of the type being altered (may be schema-qualified).
@@ -1080,6 +1090,7 @@ pub struct AlterType {
 /// An [AlterType] operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterTypeOperation {
@@ -1094,6 +1105,7 @@ pub enum AlterTypeOperation {
 /// See [AlterTypeOperation::Rename]
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterTypeRename {
     /// The new name for the type.
@@ -1103,6 +1115,7 @@ pub struct AlterTypeRename {
 /// See [AlterTypeOperation::AddValue]
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterTypeAddValue {
     /// If true, do not error when the value already exists (`IF NOT EXISTS`).
@@ -1116,6 +1129,7 @@ pub struct AlterTypeAddValue {
 /// See [AlterTypeAddValue]
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterTypeAddValuePosition {
@@ -1128,6 +1142,7 @@ pub enum AlterTypeAddValuePosition {
 /// See [AlterTypeOperation::RenameValue]
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterTypeRenameValue {
     /// Existing value identifier to rename.
@@ -1174,6 +1189,7 @@ impl fmt::Display for AlterTypeOperation {
 /// See <https://www.postgresql.org/docs/current/sql-alteroperator.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterOperator {
     /// Operator name (can be schema-qualified)
@@ -1189,6 +1205,7 @@ pub struct AlterOperator {
 /// An [AlterOperator] operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterOperatorOperation {
@@ -1210,6 +1227,7 @@ pub enum AlterOperatorOperation {
 /// Option for `ALTER OPERATOR SET` operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum OperatorOption {
@@ -1276,6 +1294,7 @@ impl fmt::Display for OperatorOption {
 /// An `ALTER COLUMN` (`Statement::AlterTable`) operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterColumnOperation {
@@ -1372,6 +1391,7 @@ impl fmt::Display for AlterColumnOperation {
 /// [1]: https://dev.mysql.com/doc/refman/8.0/en/create-table.html
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum KeyOrIndexDisplay {
@@ -1422,6 +1442,7 @@ impl fmt::Display for KeyOrIndexDisplay {
 /// [3]: https://www.postgresql.org/docs/14/sql-createindex.html
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum IndexType {
@@ -1466,6 +1487,7 @@ impl fmt::Display for IndexType {
 /// [`ALTER TABLE`]: https://dev.mysql.com/doc/refman/8.4/en/alter-table.html
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum IndexOption {
@@ -1491,6 +1513,7 @@ impl fmt::Display for IndexOption {
 /// [PostgreSQL]: https://www.postgresql.org/docs/17/sql-altertable.html
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum NullsDistinctOption {
@@ -1514,6 +1537,7 @@ impl fmt::Display for NullsDistinctOption {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// A parameter of a stored procedure or function declaration.
 pub struct ProcedureParam {
@@ -1546,6 +1570,7 @@ impl fmt::Display for ProcedureParam {
 /// SQL column definition
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ColumnDef {
     /// Column name.
@@ -1588,6 +1613,7 @@ impl fmt::Display for ColumnDef {
 /// ```
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ViewColumnDef {
     /// Column identifier.
@@ -1600,6 +1626,7 @@ pub struct ViewColumnDef {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Representation of how multiple `ColumnOption`s are grouped for a column.
 #[repr(u16)]
@@ -1658,6 +1685,7 @@ impl fmt::Display for ViewColumnDef {
 /// "column options," and we allow any column option to be named.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ColumnOptionDef {
     /// Optional name of the constraint.
@@ -1681,6 +1709,7 @@ impl fmt::Display for ColumnOptionDef {
 /// [Snowflake]: https://docs.snowflake.com/en/sql-reference/sql/create-table
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum IdentityPropertyKind {
@@ -1727,6 +1756,7 @@ impl fmt::Display for IdentityPropertyKind {
 /// Properties for the `IDENTITY` / `AUTOINCREMENT` column option.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct IdentityProperty {
     /// Optional parameters specifying seed/increment for the identity column.
@@ -1751,6 +1781,7 @@ pub struct IdentityProperty {
 /// [Snowflake]: https://docs.snowflake.com/en/sql-reference/sql/create-table
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum IdentityPropertyFormatKind {
@@ -1790,6 +1821,7 @@ impl fmt::Display for IdentityPropertyFormatKind {
 /// Parameters specifying seed and increment for identity columns.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct IdentityParameters {
     /// The initial seed expression for the identity column.
@@ -1806,6 +1838,7 @@ pub struct IdentityParameters {
 /// [Snowflake]: https://docs.snowflake.com/en/sql-reference/sql/create-table
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum IdentityPropertyOrder {
@@ -1833,6 +1866,7 @@ impl fmt::Display for IdentityPropertyOrder {
 /// [Snowflake]: https://docs.snowflake.com/en/sql-reference/sql/create-table
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum ColumnPolicy {
@@ -1861,6 +1895,7 @@ impl fmt::Display for ColumnPolicy {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Properties describing a column policy (masking or projection).
 pub struct ColumnPolicyProperty {
@@ -1885,6 +1920,7 @@ pub struct ColumnPolicyProperty {
 /// [Snowflake]: https://docs.snowflake.com/en/sql-reference/sql/create-table
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct TagsColumnOption {
     /// This flag indicates that the tags option is declared using the `WITH` prefix.
@@ -1912,6 +1948,7 @@ impl fmt::Display for TagsColumnOption {
 /// TABLE` statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum ColumnOption {
@@ -2180,6 +2217,7 @@ impl fmt::Display for ColumnOption {
 /// 'ExpStored' is used for a column generated from an expression and stored.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum GeneratedAs {
@@ -2195,6 +2233,7 @@ pub enum GeneratedAs {
 /// No modifier is typically the same as Virtual.
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum GeneratedExpressionMode {
@@ -2253,6 +2292,7 @@ pub(crate) fn display_option_spaced<T: fmt::Display>(option: &Option<T>) -> impl
 /// Used in UNIQUE and foreign key constraints. The individual settings may occur in any order.
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Default, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ConstraintCharacteristics {
     /// `[ DEFERRABLE | NOT DEFERRABLE ]`
@@ -2266,6 +2306,7 @@ pub struct ConstraintCharacteristics {
 /// Initial setting for deferrable constraints (`INITIALLY IMMEDIATE` or `INITIALLY DEFERRED`).
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum DeferrableInitial {
@@ -2334,6 +2375,7 @@ impl fmt::Display for ConstraintCharacteristics {
 /// Used in foreign key constraints in `ON UPDATE` and `ON DELETE` options.
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum ReferentialAction {
@@ -2366,6 +2408,7 @@ impl fmt::Display for ReferentialAction {
 /// Used in `DROP` statements.
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum DropBehavior {
@@ -2387,6 +2430,7 @@ impl fmt::Display for DropBehavior {
 /// SQL user defined type definition
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum UserDefinedTypeRepresentation {
@@ -2443,6 +2487,7 @@ impl fmt::Display for UserDefinedTypeRepresentation {
 /// SQL user defined type attribute definition
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct UserDefinedTypeCompositeAttributeDef {
     /// Attribute name.
@@ -2487,6 +2532,7 @@ impl fmt::Display for UserDefinedTypeCompositeAttributeDef {
 /// ```
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum UserDefinedTypeInternalLength {
@@ -2525,6 +2571,7 @@ impl fmt::Display for UserDefinedTypeInternalLength {
 /// ```
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum Alignment {
@@ -2570,6 +2617,7 @@ impl fmt::Display for Alignment {
 /// ```
 #[derive(Debug, Copy, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum UserDefinedTypeStorage {
@@ -2613,6 +2661,7 @@ impl fmt::Display for UserDefinedTypeStorage {
 /// ```
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum UserDefinedTypeRangeOption {
@@ -2669,6 +2718,7 @@ impl fmt::Display for UserDefinedTypeRangeOption {
 /// ```
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum UserDefinedTypeSqlDefinitionOption {
@@ -2755,6 +2805,7 @@ impl fmt::Display for UserDefinedTypeSqlDefinitionOption {
 /// [ClickHouse](https://clickhouse.com/docs/en/sql-reference/statements/optimize)
 #[derive(Debug, Clone, PartialEq, Eq, Hash, PartialOrd, Ord)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum Partition {
@@ -2786,6 +2837,7 @@ impl fmt::Display for Partition {
 /// [ClickHouse](https://clickhouse.com/docs/en/sql-reference/statements/optimize)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum Deduplicate {
@@ -2810,6 +2862,7 @@ impl fmt::Display for Deduplicate {
 /// [Hive](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTable)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ClusteredBy {
     /// columns used for clustering
@@ -2837,6 +2890,7 @@ impl fmt::Display for ClusteredBy {
 /// CREATE INDEX statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateIndex {
     /// index name
@@ -2933,6 +2987,7 @@ impl fmt::Display for CreateIndex {
 /// CREATE TABLE statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateTable {
     /// `OR REPLACE` clause
@@ -3457,6 +3512,7 @@ impl fmt::Display for CreateTable {
 /// [Teradata](https://docs.teradata.com/r/Enterprise_IntelliFlex_VMware/SQL-Data-Definition-Language-Syntax-and-Examples/Table-Statements/CREATE-TABLE-and-CREATE-TABLE-AS/Syntax-Elements/AS_clause/WITH-Clause-Phrase)
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct WithData {
     /// `true` for `WITH DATA`, `false` for `WITH NO DATA`.
@@ -3491,6 +3547,7 @@ impl fmt::Display for WithData {
 /// See [PostgreSQL](https://www.postgresql.org/docs/current/sql-createtable.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum ForValues {
@@ -3545,6 +3602,7 @@ impl fmt::Display for ForValues {
 /// MINVALUE (negative infinity), or MAXVALUE (positive infinity).
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum PartitionBoundValue {
@@ -3571,6 +3629,7 @@ impl fmt::Display for PartitionBoundValue {
 /// See [Redshift](https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_TABLE_NEW.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum DistStyle {
@@ -3597,6 +3656,7 @@ impl fmt::Display for DistStyle {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// ```sql
 /// CREATE DOMAIN name [ AS ] data_type
@@ -3647,6 +3707,7 @@ impl fmt::Display for CreateDomain {
 /// The return type of a `CREATE FUNCTION` statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum FunctionReturnType {
@@ -3669,6 +3730,7 @@ impl fmt::Display for FunctionReturnType {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// CREATE FUNCTION statement
 pub struct CreateFunction {
@@ -3840,6 +3902,7 @@ impl fmt::Display for CreateFunction {
 /// [Hive](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=27362034#LanguageManualDDL-CreateDataConnectorCreateConnector)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateConnector {
     /// The name of the connector to be created.
@@ -3899,6 +3962,7 @@ impl fmt::Display for CreateConnector {
 /// See [PostgreSQL](https://www.postgresql.org/docs/current/sql-alterschema.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterSchemaOperation {
@@ -3965,6 +4029,7 @@ impl fmt::Display for AlterSchemaOperation {
 /// [MySQL]: https://dev.mysql.com/doc/refman/8.4/en/alter-table.html
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum RenameTableNameKind {
@@ -3985,6 +4050,7 @@ impl fmt::Display for RenameTableNameKind {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// An `ALTER SCHEMA` (`Statement::AlterSchema`) statement.
 pub struct AlterSchema {
@@ -4022,6 +4088,7 @@ impl Spanned for RenameTableNameKind {
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Whether the syntax used for the trigger object (ROW or STATEMENT) is `FOR` or `FOR EACH`.
 #[repr(u16)]
@@ -4043,6 +4110,7 @@ impl Display for TriggerObjectKind {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// CREATE TRIGGER
 ///
@@ -4240,6 +4308,7 @@ impl Display for CreateTrigger {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// DROP TRIGGER
 ///
@@ -4288,6 +4357,7 @@ impl fmt::Display for DropTrigger {
 /// ```
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct Truncate {
     /// Table names to truncate
@@ -4363,6 +4433,7 @@ impl Spanned for Truncate {
 /// MSCK (Hive) - MetaStore Check command
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct Msck {
     /// Table name to check
@@ -4398,6 +4469,7 @@ impl Spanned for Msck {
 /// CREATE VIEW statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateView {
     /// True if this is a `CREATE OR ALTER VIEW` statement
@@ -4523,6 +4595,7 @@ impl fmt::Display for CreateView {
 /// Note: this is a PostgreSQL-specific statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateExtension {
     /// Extension name
@@ -4582,6 +4655,7 @@ impl Spanned for CreateExtension {
 /// <https://www.postgresql.org/docs/current/sql-dropextension.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropExtension {
     /// One or more extension names to drop
@@ -4616,6 +4690,7 @@ impl Spanned for DropExtension {
 /// Note: this is a PostgreSQL-specific statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateCollation {
     /// Whether `IF NOT EXISTS` was specified.
@@ -4629,6 +4704,7 @@ pub struct CreateCollation {
 /// Definition forms supported by `CREATE COLLATION`.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum CreateCollationDefinition {
@@ -4679,6 +4755,7 @@ impl Spanned for CreateCollation {
 /// Note: this is a PostgreSQL-specific statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterCollation {
     /// Name of the collation being altered.
@@ -4690,6 +4767,7 @@ pub struct AlterCollation {
 /// Operations supported by `ALTER COLLATION`.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterCollationOperation {
@@ -4754,6 +4832,7 @@ impl Spanned for AlterCollation {
 /// Used to distinguish between regular tables, Iceberg tables, and Dynamic tables.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterTableType {
@@ -4771,6 +4850,7 @@ pub enum AlterTableType {
 /// ALTER TABLE statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterTable {
     /// Table name
@@ -4824,6 +4904,7 @@ impl fmt::Display for AlterTable {
 /// DROP FUNCTION statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropFunction {
     /// Whether to include the `IF EXISTS` clause.
@@ -4859,6 +4940,7 @@ impl Spanned for DropFunction {
 /// See <https://www.postgresql.org/docs/current/sql-createoperator.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateOperator {
     /// Operator name (can be schema-qualified)
@@ -4879,6 +4961,7 @@ pub struct CreateOperator {
 /// See <https://www.postgresql.org/docs/current/sql-createopfamily.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateOperatorFamily {
     /// Operator family name (can be schema-qualified)
@@ -4891,6 +4974,7 @@ pub struct CreateOperatorFamily {
 /// See <https://www.postgresql.org/docs/current/sql-createopclass.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateOperatorClass {
     /// Operator class name (can be schema-qualified)
@@ -4961,6 +5045,7 @@ impl fmt::Display for CreateOperatorClass {
 /// Operator argument types for CREATE OPERATOR CLASS
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct OperatorArgTypes {
     /// Left-hand operand data type for the operator.
@@ -4978,6 +5063,7 @@ impl fmt::Display for OperatorArgTypes {
 /// An item in a CREATE OPERATOR CLASS statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum OperatorClassItem {
@@ -5013,6 +5099,7 @@ pub enum OperatorClassItem {
 /// Purpose of an operator in an operator class
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum OperatorPurpose {
@@ -5081,6 +5168,7 @@ impl fmt::Display for OperatorPurpose {
 /// See <https://www.postgresql.org/docs/current/sql-dropoperator.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropOperator {
     /// `IF EXISTS` clause
@@ -5094,6 +5182,7 @@ pub struct DropOperator {
 /// Operator signature for a `DROP OPERATOR` statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropOperatorSignature {
     /// Operator name
@@ -5140,6 +5229,7 @@ impl Spanned for DropOperator {
 /// See <https://www.postgresql.org/docs/current/sql-dropopfamily.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropOperatorFamily {
     /// `IF EXISTS` clause
@@ -5177,6 +5267,7 @@ impl Spanned for DropOperatorFamily {
 /// See <https://www.postgresql.org/docs/current/sql-dropopclass.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropOperatorClass {
     /// `IF EXISTS` clause
@@ -5213,6 +5304,7 @@ impl Spanned for DropOperatorClass {
 /// An item in an ALTER OPERATOR FAMILY ADD statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum OperatorFamilyItem {
@@ -5243,6 +5335,7 @@ pub enum OperatorFamilyItem {
 /// An item in an ALTER OPERATOR FAMILY DROP statement
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum OperatorFamilyDropItem {
@@ -5332,6 +5425,7 @@ impl fmt::Display for OperatorFamilyDropItem {
 /// See <https://www.postgresql.org/docs/current/sql-alteropfamily.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterOperatorFamily {
     /// Operator family name (can be schema-qualified)
@@ -5345,6 +5439,7 @@ pub struct AlterOperatorFamily {
 /// An [AlterOperatorFamily] operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterOperatorFamilyOperation {
@@ -5415,6 +5510,7 @@ impl Spanned for AlterOperatorFamily {
 /// See <https://www.postgresql.org/docs/current/sql-alteropclass.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterOperatorClass {
     /// Operator class name (can be schema-qualified)
@@ -5428,6 +5524,7 @@ pub struct AlterOperatorClass {
 /// An [AlterOperatorClass] operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterOperatorClassOperation {
@@ -5479,6 +5576,7 @@ impl Spanned for AlterOperatorClass {
 /// `ALTER FUNCTION` / `ALTER AGGREGATE` statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterFunction {
     /// Object type being altered.
@@ -5500,6 +5598,7 @@ pub struct AlterFunction {
 /// Function-like object type used by [`AlterFunction`].
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterFunctionKind {
@@ -5521,6 +5620,7 @@ impl fmt::Display for AlterFunctionKind {
 /// Operation for `ALTER FUNCTION` / `ALTER AGGREGATE`.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterFunctionOperation {
@@ -5555,6 +5655,7 @@ pub enum AlterFunctionOperation {
 /// Function action in `ALTER FUNCTION ... action [ ... ] [ RESTRICT ]`.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterFunctionAction {
@@ -5692,6 +5793,7 @@ impl Spanned for AlterFunction {
 /// See [PostgreSQL](https://www.postgresql.org/docs/current/sql-createpolicy.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreatePolicy {
     /// Name of the policy.
@@ -5745,6 +5847,7 @@ impl fmt::Display for CreatePolicy {
 /// [PostgreSQL](https://www.postgresql.org/docs/current/sql-createpolicy.html)
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum CreatePolicyType {
@@ -5770,6 +5873,7 @@ impl fmt::Display for CreatePolicyType {
 /// [PostgreSQL](https://www.postgresql.org/docs/current/sql-createpolicy.html)
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum CreatePolicyCommand {
@@ -5802,6 +5906,7 @@ impl fmt::Display for CreatePolicyCommand {
 /// See [PostgreSQL](https://www.postgresql.org/docs/current/sql-droppolicy.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct DropPolicy {
     /// `true` when `IF EXISTS` was present.
@@ -5851,6 +5956,7 @@ impl From<DropPolicy> for crate::ast::Statement {
 /// (Postgresql-specific)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct AlterPolicy {
     /// Policy name to alter.

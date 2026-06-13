@@ -41,6 +41,7 @@ use super::keywords::RESERVED_FOR_IDENTIFIER;
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct PostgreSqlDialect {}
 
 const PERIOD_PREC: u8 = 200;

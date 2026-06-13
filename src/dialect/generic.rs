@@ -24,6 +24,7 @@ use crate::dialect::Dialect;
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct GenericDialect;
 
 impl Dialect for GenericDialect {

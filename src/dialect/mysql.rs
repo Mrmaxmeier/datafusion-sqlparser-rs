@@ -40,6 +40,7 @@ const RESERVED_FOR_TABLE_ALIAS_MYSQL: &[Keyword] = &[
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct MySqlDialect {}
 
 impl Dialect for MySqlDialect {

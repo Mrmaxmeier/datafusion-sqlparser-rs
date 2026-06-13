@@ -38,6 +38,7 @@ use sqlparser_derive::{Visit, VisitMut};
 /// `ALTER TABLE ADD <constraint>` statement.
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum TableConstraint {
@@ -173,6 +174,7 @@ impl fmt::Display for TableConstraint {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// A `CHECK` constraint (`[ CONSTRAINT <name> ] CHECK (<expr>) [[NOT] ENFORCED]`).
 pub struct CheckConstraint {
@@ -217,6 +219,7 @@ impl crate::ast::Spanned for CheckConstraint {
 /// }`).
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ForeignKeyConstraint {
     /// Optional constraint name.
@@ -306,6 +309,7 @@ impl crate::ast::Spanned for ForeignKeyConstraint {
 /// [2]: https://dev.mysql.com/doc/refman/8.0/en/spatial-types.html
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct FullTextOrSpatialConstraint {
     /// Whether this is a `FULLTEXT` (true) or `SPATIAL` (false) definition.
@@ -361,6 +365,7 @@ impl crate::ast::Spanned for FullTextOrSpatialConstraint {
 /// [1]: https://dev.mysql.com/doc/refman/8.0/en/create-table.html
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct IndexConstraint {
     /// Whether this index starts with KEY (true) or INDEX (false), to maintain the same syntax.
@@ -430,6 +435,7 @@ impl crate::ast::Spanned for IndexConstraint {
 /// [3]: IndexOption
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct PrimaryKeyConstraint {
     /// Constraint name.
@@ -490,6 +496,7 @@ impl crate::ast::Spanned for PrimaryKeyConstraint {
 
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 /// Unique constraint definition.
 pub struct UniqueConstraint {
@@ -563,6 +570,7 @@ impl crate::ast::Spanned for UniqueConstraint {
 /// See <https://www.postgresql.org/docs/current/sql-altertable.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct ConstraintUsingIndex {
     /// Optional constraint name.

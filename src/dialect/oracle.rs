@@ -32,6 +32,7 @@ const RESERVED_KEYWORDS_FOR_SELECT_ITEM_OPERATOR: [Keyword; 1] = [Keyword::CONNE
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct OracleDialect;
 
 impl Dialect for OracleDialect {

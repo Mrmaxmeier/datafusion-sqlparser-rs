@@ -63,6 +63,7 @@ use crate::parser::ParserError;
 /// [1]: crate::ast::Statement::CreateTable
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateTableBuilder {
     /// Whether the statement uses `OR REPLACE`.

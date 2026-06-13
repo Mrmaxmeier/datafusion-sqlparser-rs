@@ -40,6 +40,7 @@ use crate::tokenizer::Span;
 /// <https://www.postgresql.org/docs/current/sql-createrole.html>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum RoleOption {
@@ -116,6 +117,7 @@ impl fmt::Display for RoleOption {
 /// * SET `configuration_parameter` FROM CURRENT
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum SetConfigValue {
@@ -132,6 +134,7 @@ pub enum SetConfigValue {
 /// * RESET ALL
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum ResetConfig {
@@ -144,6 +147,7 @@ pub enum ResetConfig {
 /// An `ALTER ROLE` (`Statement::AlterRole`) operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum AlterRoleOperation {
@@ -245,6 +249,7 @@ impl fmt::Display for AlterRoleOperation {
 /// A `USE` (`Statement::Use`) operation
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum Use {
@@ -288,6 +293,7 @@ impl fmt::Display for Use {
 /// See: <https://docs.snowflake.com/en/sql-reference/sql/use-secondary-roles>
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 #[repr(u16)]
 pub enum SecondaryRoles {
@@ -313,6 +319,7 @@ impl fmt::Display for SecondaryRoles {
 /// See [PostgreSQL](https://www.postgresql.org/docs/current/sql-createrole.html)
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct CreateRole {
     /// Role names to create.
@@ -440,6 +447,7 @@ impl Spanned for CreateRole {
 /// GRANT privileges ON objects TO grantees
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct Grant {
     /// Privileges being granted.
@@ -494,6 +502,7 @@ impl From<Grant> for crate::ast::Statement {
 /// REVOKE privileges ON objects FROM grantees
 #[derive(Debug, Clone, PartialEq, PartialOrd, Eq, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(Serialize, facet::Facet, Deserialize))]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 #[cfg_attr(feature = "visitor", derive(Visit, VisitMut))]
 pub struct Revoke {
     /// Privileges to revoke.

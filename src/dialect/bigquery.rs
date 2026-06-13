@@ -47,6 +47,7 @@ const RESERVED_FOR_COLUMN_ALIAS: &[Keyword] = &[
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct BigQueryDialect;
 
 impl Dialect for BigQueryDialect {

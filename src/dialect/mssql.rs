@@ -33,6 +33,7 @@ use alloc::{vec, vec::Vec};
     feature = "serde",
     derive(serde::Serialize, facet::Facet, serde::Deserialize)
 )]
+#[cfg_attr(feature = "lod", derive(::lod_derive::LodNode, ::lod_derive::Fresh))]
 pub struct MsSqlDialect {}
 
 impl Dialect for MsSqlDialect {
