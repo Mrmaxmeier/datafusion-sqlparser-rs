@@ -61,7 +61,7 @@ log = "0.4"
 # back into the lod-sketch workspace (this crate is vendored under `vendor/` and
 # excluded from the workspace, so it can't use `workspace = true`).
 lod = { path = "../../lod-core", optional = true }
-lod_derive = { path = "../../lod_derive", optional = true }
+lod_derive = { path = "../../lod-derive", optional = true }
 recursive = { version = "0.1.1", optional = true}
 
 serde = { version = "1.0", default-features = false, features = ["derive", "alloc"], optional = true }
