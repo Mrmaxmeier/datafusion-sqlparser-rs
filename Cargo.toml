@@ -47,11 +47,21 @@ recursive-protection = ["std", "recursive"]
 json_example = ["serde_json", "serde"]
 derive-dialect = ["sqlparser_derive"]
 visitor = ["sqlparser_derive"]
+# Derive lod's `LodNode`/`Fresh`/`Entropy` on every AST + tokenizer type, so the
+# `lod` fuzzing engine can introspect them on the monomorphic `Engine<G>` path.
+# Implies `serde` because the `facet::Facet` derive (which `LodNode`'s corpus
+# registration relies on) is gated behind it.
+lod = ["serde", "dep:lod", "dep:lod_derive"]
 
 [dependencies]
 bigdecimal = { version = "0.4.1", features = ["serde"], optional = true }
 facet = "0.46.0"
 log = "0.4"
+# lod fuzzing-engine glue (optional; enabled via the `lod` feature). Paths reach
+# back into the lod-sketch workspace (this crate is vendored under `vendor/` and
+# excluded from the workspace, so it can't use `workspace = true`).
+lod = { path = "../../lod-core", optional = true }
+lod_derive = { path = "../../lod_derive", optional = true }
 recursive = { version = "0.1.1", optional = true}
 
 serde = { version = "1.0", default-features = false, features = ["derive", "alloc"], optional = true }
