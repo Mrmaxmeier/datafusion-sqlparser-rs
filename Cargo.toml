@@ -55,7 +55,7 @@ lod = ["serde", "dep:lod", "dep:lod_derive"]
 
 [dependencies]
 bigdecimal = { version = "0.4.1", features = ["serde"], optional = true }
-facet = "0.46.0"
+facet = "0.50.0-rc.5"
 log = "0.4"
 # lod fuzzing-engine glue (optional; enabled via the `lod` feature). Paths reach
 # back into the lod-sketch workspace (this crate is vendored under `vendor/` and
